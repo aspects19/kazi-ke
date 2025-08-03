@@ -41,12 +41,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
       await login(email, password);
 
-      await database.createDocument(config.databaseId, config.usersCollectionId, ID.unique(), {
-        accountId: newAccount.$id,
-        email,
-        name,
-        avatar: avatarURL,
-      });
+      // await database.createDocument(config.databaseId, config.usersCollectionId, ID.unique(), {
+      //   accountId: newAccount.$id,
+      //   email,
+      //   name,
+      //   avatar: avatarURL,
+      // });
     } finally {
       setIsLoading(false);
     }
