@@ -2,7 +2,9 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import FormField from '@/components/formField';
 import Button from '@/components/Button';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import { useUser } from '@/context/user';
+import { AppwriteException } from 'react-native-appwrite';
 
 function SignUp() {
 const [form, setForm] = useState({
@@ -11,6 +13,20 @@ const [form, setForm] = useState({
   password: '',
    
 })
+
+const {signup} = useUser();
+
+async function handleSignup() {
+    try {
+      console.log("Handling signup")
+      await signup(form.email, form.password, form.username);
+      router.replace('/');
+    } catch (err) {
+      if (err instanceof AppwriteException) {
+        console.log(err.message);
+      }
+    }
+  }
 
   return (
     <View  className='bg-[#0b0b1d] h-full flex items-center justify-center text-white'>
@@ -43,7 +59,7 @@ const [form, setForm] = useState({
         
         <Button 
           title="Sign Up"
-          handlePress={() => {}}
+          handlePress={handleSignup}
           containerStyles=""
           textStyles=""
         />

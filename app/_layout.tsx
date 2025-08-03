@@ -6,11 +6,12 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { UserProvider } from '@/context/user';
+
 import "../global.css";
 
 
 export {
-  // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from 'expo-router';
 
@@ -42,8 +43,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
-}
+  return(
+  <UserProvider>
+    <RootLayoutNav />
+  </UserProvider>
+)}
 
 function RootLayoutNav() {
 

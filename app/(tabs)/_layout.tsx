@@ -24,12 +24,12 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: 'Tab One',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Link href="/" asChild>
+            <Link href="/home" >
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome

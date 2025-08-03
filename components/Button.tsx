@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 type ButtonProps = {
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({ title, handlePress, containerStyles = '
   return (
     <TouchableOpacity
       className={`bg-[#133650] my-4 rounded-xl min-h-[62px] justify-center items-center ${containerStyles}`}
-      onPress={handlePress}
+      onPress={ handlePress}
       activeOpacity={0.7}
     >
       <Text className={`text-primary font-semibold ${textStyles}`}>{title}</Text>
