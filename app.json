@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "kazike",
-    "slug": "app.kazi.ke",
-    "version": "1.0.0",
+    "name": "KaziKE",
+    "slug": "kazike",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "kazike",
+    "scheme": "app.kazi.ke",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -17,6 +17,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "app.kazi.ke",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
