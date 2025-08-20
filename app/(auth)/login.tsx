@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import FormField from '@/components/formField';
 import Button from '@/components/Button';
@@ -21,11 +21,12 @@ const [form, setForm] = useState({
 
   async function handleLogin() {
     try {
-      login(form.email, form.password);
+      await login(form.email, form.password);
       router.replace('/');
     } catch (err) {
       if (err instanceof AppwriteException) {
-        console.log(err.message);
+        // Alert.alert(err.name, err.message)
+        console.log(err.message)
       }
     }
   }
@@ -61,7 +62,7 @@ const [form, setForm] = useState({
           containerStyles=""
           textStyles=""
         />
-        <View>
+        <View className='flex flex-row'>
           <Text className='text-white'>
             Don't have an account
            
@@ -70,10 +71,6 @@ const [form, setForm] = useState({
             Sign up
           </Link>
         </View>
-
-        <TouchableOpacity className='border-fuchsia-600 border-2 border-solid' onPress={ handleLogin}>
-          <Text className='text-white text-base font-bold'>Test Login</Text>
-        </TouchableOpacity>
 
       </View>
     </View>
