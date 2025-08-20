@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-nativ
 import { JobCard } from './jobCard'
 import { Search, Filter } from 'lucide-react-native'
 
-export const EmployeeView: React.FC = () => {
+export const JobSeekerView: React.FC = () => {
   const jobs = [
     {
       id: 1,

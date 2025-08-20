@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabNavigation } from '@/components/tabNavigator';
-import { EmployeeView } from '@/components/employeeView';
+import { JobSeekerView } from '@/components/jobSeeker';
 import { useUser } from '@/context/user';
 import { EmployerView } from '@/components/employerView';
 
@@ -19,7 +19,7 @@ export default function Home() {
       </View>
       <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <View style={{ flex: 1, padding: 16 }}>
-        {activeTab === 'employer' ? <EmployerView /> : <EmployeeView />}
+        {activeTab === 'employer' ? <EmployerView /> : <JobSeekerView />}
         {/* <TouchableOpacity
           style={{ marginTop: 20, backgroundColor: '#2563eb', padding: 10, borderRadius: 8 }}
           onPress={() => { logout(); router.navigate('/'); }}
