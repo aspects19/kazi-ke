@@ -7,9 +7,11 @@ import PostJobModal from './postJob'
 import { config, getCollection } from '@/lib/appwrite'
 import { AppwriteException, Models } from 'react-native-appwrite'
 import type {JobDocument} from '@/types/docuType'
+import type { ApplyDocument } from '@/types/applicationType'
 
 export const EmployerView: React.FC = () => {
   const [postedJobs, setpostedJobs] = useState< JobDocument[]>([]);
+  const [applications, setApplications] = useState<ApplyDocument[]>([]);
  
   const {user} = useUser();
 
@@ -17,7 +19,6 @@ export const EmployerView: React.FC = () => {
 async function fetchPostedJobs() {
 try {
     const response = await getCollection(config.jobsCollectionId)
-    console.log(response)
     setpostedJobs(
       (response as any[]).map((doc) => ({
         ...doc,
@@ -26,6 +27,30 @@ try {
         applicants: doc.applicants ?? 0,
         status: doc.status ?? 'Active',
         $id: doc.$id,
+      }))
+    )
+} catch (err) {
+  if (err instanceof AppwriteException) {
+    Alert.alert(err.message)
+  } else console.log(err);
+  
+  
+}
+}
+
+async function fetchApplications() {
+try {
+    const response = await getCollection(config.applicationsCollectionId)
+    console.log(response);
+    
+    setpostedJobs(
+      (response as any[]).map((doc) => ({
+        ...doc,
+        name: doc.name ?? '',
+        role: doc.role ?? '',
+        experience: doc.experience ?? '',
+        status: doc.status ?? 'New',
+        avatar: doc.avatar ?? ''
       }))
     )
 } catch (err) {
@@ -49,54 +74,8 @@ const  formatPostedAt = (dateString: string) => {
 
   useEffect(() => {
     fetchPostedJobs()
+    fetchApplications()
   }, [])
-
-  const applications = [
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      role: 'Frontend Developer',
-      experience: '5 years',
-      status: 'New',
-      avatar:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      role: 'UX Designer',
-      experience: '3 years',
-      status: 'Reviewed',
-      avatar:
-        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-    {
-      id: 3,
-      name: 'Alex Rodriguez',
-      role: 'Mobile Developer',
-      experience: '4 years',
-      status: 'Interviewed',
-      avatar:
-        'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-  ]
-
-  // const postedJobs = [
-  //   {
-  //     id: 1,
-  //     title: 'Senior Frontend Developer',
-  //     applicants: 12,
-  //     posted: '5 days ago',
-  //     status: 'Active',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'UX/UI Designer',
-  //     applicants: 8,
-  //     posted: '3 days ago',
-  //     status: 'Active',
-  //   },
-  // ]
 
   return (
     <ScrollView className="space-y-4">
@@ -171,7 +150,7 @@ const  formatPostedAt = (dateString: string) => {
         <View className="space-y-3">
           {applications.map((applicant) => (
             <View
-              key={applicant.id}
+              key={applicant.$id}
               className="flex-row items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0"
             >
               <View className="flex-row items-center">

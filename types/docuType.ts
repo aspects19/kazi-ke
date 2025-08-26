@@ -6,3 +6,11 @@ export interface JobDocument extends Models.Document {
   status?: string
   applicants?: number
 }
+
+export interface VerboseJobDocument extends JobDocument {
+  company: string
+  salary: string
+  location?: string
+  logo?: string
+  type?: string
+}

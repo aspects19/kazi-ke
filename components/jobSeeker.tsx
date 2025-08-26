@@ -2,67 +2,40 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { JobCard } from './jobCard';
 import { Search, Filter } from 'lucide-react-native';
-import { AppwriteException, Models } from 'react-native-appwrite';
-import { config, database } from '@/lib/appwrite';
+import { AppwriteException } from 'react-native-appwrite';
+import { config, getCollection } from '@/lib/appwrite';
+import type { VerboseJobDocument } from '@/types/docuType';
+import { formatPostedAt } from '@/utils/formatPostAt';
 
 export const JobSeekerView: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  // const [jobs, setJobs] = useState<Models.DocumentList>;
+  const [recommendedJobs, setRecommendedJobs] = useState<VerboseJobDocument[]>([]);
 
-  // useEffect(() => {
-  //   async function fetchJobs() {
-  //     setLoading(true);
-  //     try {
-  //       const res = await database.listDocuments(
-  //         config.databaseId,
-  //         config.jobsCollectionId
-  //       )
-  //       setJobs(res.documents)
-  //     } catch (err) {
-  //       if (err instanceof AppwriteException) {
-  //         Alert.alert(err.message)
-  //       }
-        
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-  //   fetchJobs()
-  // }, [])
+ async function fetchRecommendedJobs() {
+   try {
+    const response = await getCollection(config.jobsCollectionId);
+    setRecommendedJobs(
+      (response as any[]).map((doc) => ({
+        ...doc,
+        title: doc.title ?? "",
+        posted_at: doc.posted_at ?? "",
+        applicants: doc.applicants ?? 0,
+        status: doc.status ?? "Active",
+        $id: doc.$id,
+      }))
+    );
+    console.log(response)
+   } catch (err) {
+     if (err instanceof AppwriteException) {
+       Alert.alert(err.message);
+     } else console.log(err);
+   }
+ }
+
+  useEffect(() => {
+    fetchRecommendedJobs()
+  }, [])
   
-  const jobs = [
-    {
-      id: 1,
-      title: 'Frontend Developer',
-      company: 'Tech Solutions Inc.',
-      location: 'San Francisco, CA',
-      salary: '$90,000 - $120,000',
-      type: 'Full-time',
-      posted: '2 days ago',
-      logo: 'https://images.unsplash.com/photo-1549924231-f129b911e442?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-    {
-      id: 2,
-      title: 'UX Designer',
-      company: 'Creative Minds',
-      location: 'Remote',
-      salary: '$85,000 - $110,000',
-      type: 'Full-time',
-      posted: '1 day ago',
-      logo: 'https://images.unsplash.com/photo-1568822617270-2c1579f8dfe2?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-    {
-      id: 3,
-      title: 'Mobile Developer',
-      company: 'App Innovators',
-      location: 'Austin, TX',
-      salary: '$95,000 - $130,000',
-      type: 'Contract',
-      posted: '3 days ago',
-      logo: 'https://images.unsplash.com/photo-1572044162444-ad60f128bdea?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80',
-    },
-  ]
-
   {loading && <></>}
 
   return (
@@ -94,8 +67,20 @@ export const JobSeekerView: React.FC = () => {
       </View>
 
       <View className="space-y-3">
-        {jobs.map((job) => (
-          <JobCard key={job.id} job={job} />
+        {recommendedJobs.map((job, idx) => (
+          <JobCard
+            key={job.$id}
+            job={{
+              id: idx + 1,
+              title: job.title || '',
+              company: job.company || 'Unknown Company',
+              location: job.location || 'Unknown Location',
+              salary: job.salary || 'N/A',
+              type: job.type || 'N/A',
+              posted: formatPostedAt(job.posted_at) || '',
+              logo: job.logo || 'https://via.placeholder.com/50'
+            }}
+          />
         ))}
       </View>
 
