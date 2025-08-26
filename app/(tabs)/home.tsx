@@ -5,11 +5,13 @@ import { TabNavigation } from '@/components/tabNavigator';
 import { JobSeekerView } from '@/components/jobSeeker';
 import { useUser } from '@/context/user';
 import { EmployerView } from '@/components/employerView';
+import { router } from 'expo-router';
 
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'employee' | 'employer'>('employee');
 
+  const {logout} = useUser();
   return (
     <SafeAreaView className='bg-gray-100 dark:bg-gray-900 p-4 shadow-black/5 flex-1'>
       <View className='bg-white dark:bg-gray-800 p-4 shadow-sm dark:shadow-gray-800 flex justify-between items-center'>
@@ -20,12 +22,12 @@ export default function Home() {
       <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <View style={{ flex: 1, padding: 16 }}>
         {activeTab === 'employer' ? <EmployerView /> : <JobSeekerView />}
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={{ marginTop: 20, backgroundColor: '#2563eb', padding: 10, borderRadius: 8 }}
           onPress={() => { logout(); router.navigate('/'); }}
         >
           <Text style={{ color: '#fff', textAlign: 'center' }}>Log Out</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

@@ -37,16 +37,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const newAccount = await account.create(ID.unique(), email, password, name);
       if (!newAccount) throw new Error('Error creating account');
 
-      const avatarURL = avatars.getInitials(name);
+       //const avatarURL= avatars.getInitials(name);
 
       await login(email, password);
 
-      // await database.createDocument(config.databaseId, config.usersCollectionId, ID.unique(), {
-      //   accountId: newAccount.$id,
-      //   email,
-      //   name,
-      //   avatar: avatarURL,
-      // });
+      await database.createDocument(config.databaseId, config.usersCollectionId, ID.unique(), {
+        user_id : newAccount.$id,
+        email,
+        name,
+        // avatar: avatarURL,
+        role: "jobseeker",
+        created_at : new Date()
+      });
     } finally {
       setIsLoading(false);
     }

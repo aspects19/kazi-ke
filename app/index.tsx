@@ -5,7 +5,7 @@ import { Redirect, router } from 'expo-router'
 import { useUser } from '@/context/user'
 
 const index = () => {
-  const {user} = useUser();
+  const {user} = useUser
 
   if (user) router.replace('/home')
 

@@ -1,9 +1,35 @@
-import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import { JobCard } from './jobCard'
-import { Search, Filter } from 'lucide-react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { JobCard } from './jobCard';
+import { Search, Filter } from 'lucide-react-native';
+import { AppwriteException, Models } from 'react-native-appwrite';
+import { config, database } from '@/lib/appwrite';
 
 export const JobSeekerView: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  // const [jobs, setJobs] = useState<Models.DocumentList>;
+
+  // useEffect(() => {
+  //   async function fetchJobs() {
+  //     setLoading(true);
+  //     try {
+  //       const res = await database.listDocuments(
+  //         config.databaseId,
+  //         config.jobsCollectionId
+  //       )
+  //       setJobs(res.documents)
+  //     } catch (err) {
+  //       if (err instanceof AppwriteException) {
+  //         Alert.alert(err.message)
+  //       }
+        
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+  //   fetchJobs()
+  // }, [])
+  
   const jobs = [
     {
       id: 1,
@@ -37,6 +63,8 @@ export const JobSeekerView: React.FC = () => {
     },
   ]
 
+  {loading && <></>}
+
   return (
     <ScrollView className="space-y-4">
       <View className="relative">
@@ -47,19 +75,19 @@ export const JobSeekerView: React.FC = () => {
         <TextInput
           placeholder="Search jobs, skills, companies"
           placeholderTextColor="#9CA3AF"
-          className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200"
+          className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent "
         />
-        <TouchableOpacity className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-1 rounded transition-colors duration-200">
+        <TouchableOpacity className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-1 rounded ">
           <Filter size={18} className="text-gray-600 dark:text-gray-300" />
         </TouchableOpacity>
       </View>
 
       <View className="flex-row justify-between items-center">
-        <Text className="text-lg font-semibold dark:text-white transition-colors duration-200">
+        <Text className="text-lg font-semibold dark:text-white ">
           Recommended Jobs
         </Text>
         <TouchableOpacity>
-          <Text className="text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-200">
+          <Text className="text-blue-600 dark:text-blue-400 text-sm font-medium ">
             See All
           </Text>
         </TouchableOpacity>
@@ -72,15 +100,15 @@ export const JobSeekerView: React.FC = () => {
       </View>
 
       <View className="mt-6">
-        <Text className="text-lg font-semibold mb-3 dark:text-white transition-colors duration-200">
+        <Text className="text-lg font-semibold mb-3 dark:text-white ">
           Your Applications
         </Text>
-        <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 transition-colors duration-200">
-          <Text className="text-center text-gray-500 dark:text-gray-400 py-4 transition-colors duration-200">
+        <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 ">
+          <Text className="text-center text-gray-500 dark:text-gray-400 py-4 ">
             You haven't applied to any jobs yet.
           </Text>
           <TouchableOpacity className="w-full py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-lg">
-            <Text className="w-full py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-lg font-medium transition-colors duration-200">
+            <Text className="w-full py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-lg font-medium ">
               Browse More Jobs
             </Text>
           </TouchableOpacity>

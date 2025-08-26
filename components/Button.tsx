@@ -11,7 +11,7 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({ title, handlePress, containerStyles = '', textStyles = '' }) => {
   return (
     <TouchableOpacity
-      className={`bg-[#133650] my-4 rounded-xl min-h-[62px] justify-center items-center ${containerStyles}`}
+      className={`bg-[#133650] my-4 rounded-xl min-h-[50px] justify-center items-center ${containerStyles}`}
       onPress={ handlePress}
       activeOpacity={0.7}
     >

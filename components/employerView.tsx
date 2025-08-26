@@ -1,9 +1,56 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ScrollView, Alert, Modal, Pressable, StyleSheet } from 'react-native'
 import { Plus, Bell, Menu } from 'lucide-react-native'
 import { Avatar } from './avatar'
+import { useUser, } from '@/context/user'
+import PostJobModal from './postJob'
+import { config, getCollection } from '@/lib/appwrite'
+import { AppwriteException, Models } from 'react-native-appwrite'
+import type {JobDocument} from '@/types/docuType'
 
 export const EmployerView: React.FC = () => {
+  const [postedJobs, setpostedJobs] = useState< JobDocument[]>([]);
+ 
+  const {user} = useUser();
+
+
+async function fetchPostedJobs() {
+try {
+    const response = await getCollection(config.jobsCollectionId)
+    console.log(response)
+    setpostedJobs(
+      (response as any[]).map((doc) => ({
+        ...doc,
+        title: doc.title ?? '',
+        posted_at: doc.posted_at ?? '',
+        applicants: doc.applicants ?? 0,
+        status: doc.status ?? 'Active',
+        $id: doc.$id,
+      }))
+    )
+} catch (err) {
+  if (err instanceof AppwriteException) {
+    Alert.alert(err.message)
+  } else console.log(err);
+  
+  
+}
+}
+
+const  formatPostedAt = (dateString: string) => {
+  const postedDate = new Date(dateString)
+  const now = new Date()
+  const diffMs = now.getTime() - postedDate.getTime()
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return '1 day ago'
+  return `${diffDays} days ago`
+}
+
+  useEffect(() => {
+    fetchPostedJobs()
+  }, [])
+
   const applications = [
     {
       id: 1,
@@ -34,31 +81,31 @@ export const EmployerView: React.FC = () => {
     },
   ]
 
-  const postedJobs = [
-    {
-      id: 1,
-      title: 'Senior Frontend Developer',
-      applicants: 12,
-      posted: '5 days ago',
-      status: 'Active',
-    },
-    {
-      id: 2,
-      title: 'UX/UI Designer',
-      applicants: 8,
-      posted: '3 days ago',
-      status: 'Active',
-    },
-  ]
+  // const postedJobs = [
+  //   {
+  //     id: 1,
+  //     title: 'Senior Frontend Developer',
+  //     applicants: 12,
+  //     posted: '5 days ago',
+  //     status: 'Active',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'UX/UI Designer',
+  //     applicants: 8,
+  //     posted: '3 days ago',
+  //     status: 'Active',
+  //   },
+  // ]
 
   return (
     <ScrollView className="space-y-4">
       <View className="flex-row justify-between items-center">
-        <Text className="text-lg font-semibold dark:text-white transition-colors duration-200">
+        <Text className="text-lg font-semibold dark:text-white ">
           Dashboard
         </Text>
         <View className="flex-row space-x-2">
-          <TouchableOpacity className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full transition-colors duration-200">
+          <TouchableOpacity className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full ">
             <Bell size={18} className="text-gray-600 dark:text-gray-300" />
           </TouchableOpacity>
           <TouchableOpacity className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full">
@@ -71,7 +118,7 @@ export const EmployerView: React.FC = () => {
       <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
         <View className="flex-row justify-between items-center">
           <Text className="font-semibold dark:text-white">Your Job Posts</Text>
-          <TouchableOpacity className="flex items-center text-sm text-blue-600 dark:text-blue-400 font-medium transition-colors duration-200">
+          <TouchableOpacity className="flex items-center text-sm text-blue-600 dark:text-blue-400 font-medium ">
             <Plus size={16} className="mr-1 text-blue-600 dark:text-blue-400" />
             <Text className="text-sm text-blue-600 dark:text-blue-400 font-medium">
               Post a Job
@@ -82,31 +129,31 @@ export const EmployerView: React.FC = () => {
         <View className="mt-3 space-y-3">
           {postedJobs.map((job) => (
             <View
-              key={job.id}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 transition-colors duration-200"
+              key={job.$id}
+              className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 "
             >
               <View className="flex-row justify-between items-start">
                 <View>
-                  <Text className="font-medium dark:text-white transition-colors duration-200">
+                  <Text className="font-medium dark:text-white ">
                     {job.title}
                   </Text>
-                  <Text className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200">
-                    {job.applicants} applicants • {job.posted}
+                  <Text className="text-sm text-gray-500 dark:text-gray-400 ">
+                    {job.applicants} applicants • {formatPostedAt(job.posted_at)}
                   </Text>
                 </View>
-                <Text className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full transition-colors duration-200">
+                <Text className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full ">
                   {job.status}
                 </Text>
               </View>
 
               <View className="mt-3 flex-row justify-between">
                 <TouchableOpacity>
-                  <Text className="text-sm text-blue-600 dark:text-blue-400 font-medium transition-colors duration-200">
+                  <Text className="text-sm text-blue-600 dark:text-blue-400 font-medium ">
                     View Details
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text className="text-sm text-gray-600 dark:text-gray-400  transition-colors duration-200">
+                  <Text className="text-sm text-gray-600 dark:text-gray-400  ">
                     Edit
                   </Text>
                 </TouchableOpacity>
@@ -153,6 +200,12 @@ export const EmployerView: React.FC = () => {
           ))}
         </View>
       </View>
+
+      <PostJobModal/>
     </ScrollView>
   )
+
+  
+  
 }
+

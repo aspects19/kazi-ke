@@ -25,7 +25,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
             className='w-12 h-12 rounded-lg p-4 m-1 border border-gray-200 dark:border-gray-700'
           />
           <View className="ml-3">
-            <Text className="font-medium dark:text-white transition-colors duration-200">
+            <Text className="font-medium dark:text-white ">
               {job.title}
             </Text>
             <Text  className="text-sm text-gray-600 dark:text-gray-300">
