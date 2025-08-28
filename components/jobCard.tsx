@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookmarkIcon } from 'lucide-react-native';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Link, router } from 'expo-router';
 
 interface JobCardProps {
   job: {
@@ -52,16 +53,19 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </Text>
       </View>
       <View className="mt-3 flex  flex-row justify-between">
-        <TouchableOpacity className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 py-1.5 px-4 rounded-lg ">
+        <Link className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 py-1.5 px-4 rounded-lg "
+          href={{
+            pathname: '/apply',
+            params: {
+              title: job?.title || 'Ux Designer',
+              company: job.company || 'New job',
+              location: job.location || 'Nairobi'
+          }
+          }}>
           <Text className='text-white text-sm font-medium'>
             Apply Now
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm py-1.5 px-4 rounded-lg">
-          <Text className='text-gray-700 dark:text-gray-300 text-sm'>
-            Details
-          </Text>
-        </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );

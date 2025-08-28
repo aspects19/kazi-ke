@@ -38,7 +38,8 @@ async function handleSignup() {
           value={form.username}
           handleChangeText={(e: any) => setForm({ ...form, username: e })}
           additionalStyles=" mt-7 w-80"
-          keyBoardType="text" placeholder={"Name"}        
+          keyBoardType="text" placeholder={"Name"}
+          autoComplete="name"         
         />
 
         <FormField
@@ -46,7 +47,9 @@ async function handleSignup() {
           value={form.email}
           handleChangeText={(e: any) => setForm({ ...form, email: e })}
           additionalStyles=" mt-7 w-80"
-          keyBoardType="email-address" placeholder={"Email"}        
+          keyBoardType="email-address" placeholder={"Email"}   
+          autoComplete="email" 
+          keyboardType= 'email-address'      
         />
 
         <FormField
@@ -54,7 +57,8 @@ async function handleSignup() {
           value={form.password}
           handleChangeText={(e: any) => setForm({ ...form, password: e })}
           additionalStyles=" mt-7"
-          keyBoardType="password" placeholder={"Password"}        
+          keyBoardType="password" placeholder={"Password"}  
+          autoComplete="password"       
         />
         
         <Button 

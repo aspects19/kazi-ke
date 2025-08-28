@@ -41,11 +41,12 @@ const [form, setForm] = useState({
       <View>
 
         <FormField
-          title="Email"
+          title="email"
           value={form.email}
           handleChangeText={(e: any) => setForm({ ...form, email: e })}
           additionalStyles=" mt-7 w-80"
-           placeholder={"Email"}        
+          placeholder={"Email"}  
+          keyboardType= 'email-address'     
         />
 
         <FormField
@@ -53,7 +54,7 @@ const [form, setForm] = useState({
           value={form.password}
           handleChangeText={(e: any) => setForm({ ...form, password: e })}
           additionalStyles=" mt-7"
-          keyBoardType="password" placeholder={"Password"}        
+          keyBoardType="password" placeholder={"Password"}    
         />
         
         <Button 

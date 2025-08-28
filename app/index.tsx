@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native'
+import 'react-native-url-polyfill/auto'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Redirect, router } from 'expo-router'
 import { useUser } from '@/context/user'
 
 const index = () => {
-  const {user} = useUser
+  const {user} = useUser()
 
   if (user) router.replace('/home')
 

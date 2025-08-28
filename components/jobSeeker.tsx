@@ -13,6 +13,7 @@ export const JobSeekerView: React.FC = () => {
 
  async function fetchRecommendedJobs() {
    try {
+    setLoading(true);
     const response = await getCollection(config.jobsCollectionId);
     setRecommendedJobs(
       (response as any[]).map((doc) => ({
@@ -24,7 +25,6 @@ export const JobSeekerView: React.FC = () => {
         $id: doc.$id,
       }))
     );
-    console.log(response)
    } catch (err) {
      if (err instanceof AppwriteException) {
        Alert.alert(err.message);

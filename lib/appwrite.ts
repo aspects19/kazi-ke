@@ -14,7 +14,7 @@ export const config = {
   endpoint: "https://fra.cloud.appwrite.io/v1",
   projectId: "688c52fc0034a4f78b3d",
   databaseId: "6890b5bc001700145349",
-  usersCollectionId: "6890b5cc00091a311a6c",
+  usersCollectionId: "conso",
   jobsCollectionId: "6890b7c700256c376329",
   applicationsCollectionId: "6890b908000f06b4a0eb",
   resumeBucketId: "6890ba6f0031dfde25d7",
@@ -22,7 +22,10 @@ export const config = {
 
 const client: Client = new Client();
 
-client.setEndpoint(config.endpoint).setProject(config.projectId);
+client
+  .setEndpoint(config.endpoint)
+  .setProject(config.projectId)
+  .setPlatform('com.aspect.kazike');
 
 export const account: Account = new Account(client);
 export const database: Databases = new Databases(client);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Modal, Pressable, View, Text, StyleSheet } from "react-native";
+import { Alert, Modal, View, Text } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {Picker} from '@react-native-picker/picker';
 import FormField from "./formField";
@@ -11,7 +11,7 @@ import { X } from "lucide-react-native";
 
   const PostJobModal = () => {
 
-    const [modalVisible, setModalVisible] = useState(true)
+    const [modalVisible, setModalVisible] = useState(false)
     const [form, setForm] = useState({
         title : '',
         description: '',
