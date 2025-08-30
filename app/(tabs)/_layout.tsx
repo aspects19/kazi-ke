@@ -32,16 +32,36 @@ import { Platform } from "react-native";
 
 export default function TabsLayout() {
   return (
+  
     <Tabs
       screenOptions={{
+
         headerShown: false,
+        statusBarHidden: true
         tabBarActiveTintColor: "#2563EB", // tailwind blue-600
         tabBarInactiveTintColor: "#6B7280", // gray-500
+        // tabBarStyle: {
+        //   height: Platform.OS === "ios" ? 80 : 60,
+        //   paddingBottom: Platform.OS === "ios" ? 20 : 8,
+        //   backgroundColor: "black",
+        // },
         tabBarStyle: {
-          height: Platform.OS === "ios" ? 80 : 60,
-          paddingBottom: Platform.OS === "ios" ? 20 : 8,
+          position: "absolute",
+          bottom: 20,
+          left: 20,
+          right: 20,
+          height: 80,
+          paddingBottom: 20,
           backgroundColor: "black",
+          borderRadius: 30, // rounded corners
+          elevation: 5, // Android shadow
+          shadowColor: "#000", // iOS shadow
+          shadowOpacity: 0.1,
+          shadowOffset: { width: 0, height: 5 },
+          shadowRadius: 10,
         },
+
+
       }}
     >
       <Tabs.Screen
