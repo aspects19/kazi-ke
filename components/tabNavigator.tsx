@@ -1,3 +1,4 @@
+// components/tabNavigator.tsx
 import React from 'react'
 import { BriefcaseIcon, UserIcon } from 'lucide-react-native'
 import { View, Text, TouchableOpacity } from 'react-native'

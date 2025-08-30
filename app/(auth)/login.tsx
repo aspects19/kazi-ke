@@ -45,7 +45,7 @@ const [form, setForm] = useState({
           value={form.email}
           handleChangeText={(e: any) => setForm({ ...form, email: e })}
           additionalStyles=" mt-7 w-80"
-          placeholder={"Email"}  
+          placeholder={"Enter email"}  
           keyboardType= 'email-address'     
         />
 
