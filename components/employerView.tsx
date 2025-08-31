@@ -162,7 +162,7 @@ export const EmployerView: React.FC = () => {
         <View className="space-y-3">
           {applications.length === 0 ? (
             <Text className="text-gray-500 dark:text-gray-400 text-center py-4">
-              No applications yet.
+              No applications to your jobs yet.
             </Text>
           ) : (
             applications.map((applicant) => (

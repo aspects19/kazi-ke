@@ -51,21 +51,24 @@ export const getCollection = async (
 };
 
 export const postJob = async (
-  title: String,
-  description: String,
-  employmentType: String,
-  user_id : String
+  title: string,
+  location: string,
+  description?: string,
+  employmentType?: string,
+  user_id?: string,
+  company?: string,
+  rates?: string
 ) => {
-  await database.createDocument(config.databaseId, 
-    config.jobsCollectionId, 
-    ID.unique(), 
-    {
-      job_id: ID.unique(),
-      title: title,
-      description: description,
-      employment_type: employmentType,
-      posted_by: user_id,
-      posted_at: new Date()
-    }
-  )
-}
+  await database.createDocument(config.databaseId, config.jobsCollectionId, ID.unique(), {
+    job_id: ID.unique(),
+    title,
+    location,
+    description: description || null,
+    employment_type: employmentType || null,
+    
+    company: company || null,
+    rates: rates || null,
+    posted_by: user_id || null,
+    posted_at: new Date().toISOString(),
+  });
+};
