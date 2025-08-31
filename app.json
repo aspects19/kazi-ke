@@ -35,7 +35,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ad4d7a2e-6fa5-4fc5-bfb1-cc3909d3b702"
+      }
+    },
+    "owner": "aspect19"
   }
 }
-
