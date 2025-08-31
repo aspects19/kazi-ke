@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaziKE - Find Your Next Opportunity</title>
+    <meta name="description" content="KaziKE connects talented job seekers with great employers. Find your dream job or hire the perfect candidate.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0e4fc0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0e4fc0',
+                        secondary: '#15161e',
+                        accent: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-primary">KaziKE</h1>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#how-it-works" class="nav-link">How it Works</a>
+                        <a href="#testimonials" class="nav-link">Testimonials</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#features" class="mobile-nav-link">Features</a>
+                <a href="#how-it-works" class="mobile-nav-link">How it Works</a>
+                <a href="#testimonials" class="mobile-nav-link">Testimonials</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 bg-gradient-to-br from-primary to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                        Find Your Next
+                        <span class="text-accent">Opportunity</span>
+                    </h1>
+                    <p class="text-xl text-blue-100 leading-relaxed">
+                        KaziKE connects talented job seekers with great employers. Whether you're looking for your dream job or searching for the perfect candidate, we've got you covered.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            Download App
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-play mr-2"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-6 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-accent mr-1"></i>
+                            <span>4.8/5 Rating</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-accent mr-1"></i>
+                            <span>10K+ Users</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-briefcase text-accent mr-1"></i>
+                            <span>5K+ Jobs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-header">
+                                <div class="app-title">KaziKE</div>
+                                <div class="app-tabs">
+                                    <div class="tab active">Job Seeker</div>
+                                    <div class="tab">Employer</div>
+                                    <div class="tab">Profile</div>
+                                </div>
+                            </div>
+                            <div class="app-content">
+                                <div class="search-bar">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Search jobs..." class="search-input">
+                                    <i class="fas fa-filter"></i>
+                                </div>
+                                <div class="job-cards">
+                                    <div class="job-card">
+                                        <h3>Senior Developer</h3>
+                                        <p class="company">TechCorp Kenya</p>
+                                        <p class="location">Nairobi, Kenya</p>
+                                        <div class="job-tags">
+                                            <span class="tag">React</span>
+                                            <span class="tag">Node.js</span>
+                                            <span class="tag">Remote</span>
+                                        </div>
+                                    </div>
+                                    <div class="job-card">
+                                        <h3>Marketing Manager</h3>
+                                        <p class="company">Growth Inc</p>
+                                        <p class="location">Mombasa, Kenya</p>
+                                        <div class="job-tags">
+                                            <span class="tag">Digital</span>
+                                            <span class="tag">Strategy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose KaziKE?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our platform offers powerful features designed to make job hunting and hiring seamless and efficient.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Smart Job Search</h3>
+                    <p class="text-gray-600">Advanced search and filtering options to find the perfect job match based on your skills, location, and preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Quick Apply</h3>
+                    <p class="text-gray-600">Apply to multiple jobs with just a few taps. Save your profile and let employers find you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Analytics Dashboard</h3>
+                    <p class="text-gray-600">Track your application status, view job insights, and monitor your career progress.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Employer Tools</h3>
+                    <p class="text-gray-600">Post jobs, manage applications, and find the best candidates with our comprehensive employer dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Secure & Private</h3>
+                    <p class="text-gray-600">Your data is protected with enterprise-grade security. Control who sees your information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Mobile First</h3>
+                    <p class="text-gray-600">Optimized for mobile devices. Search and apply for jobs on the go, anywhere, anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    How It Works
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Getting started with KaziKE is simple and straightforward. Here's how you can begin your journey.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Create Your Profile</h3>
+                            <p class="text-gray-600">Sign up and build your professional profile with your skills, experience, and career goals.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Search & Apply</h3>
+                            <p class="text-gray-600">Browse thousands of job opportunities and apply with just one tap using our streamlined process.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Get Hired</h3>
+                            <p class="text-gray-600">Connect with employers, schedule interviews, and land your dream job with our support.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="process-visual">
+                        <div class="process-step active">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Sign Up</span>
+                        </div>
+                        <div class="process-arrow"></div>
+                        <div class="process-step">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </div>
+                        <div class="process-arrow"></div>
+                        <div class="process-step">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Apply</span>
+                        </div>
+                        <div class="process-arrow"></div>
+                        <div class="process-step">
+                            <i class="fas fa-handshake"></i>
+                            <span>Hired</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    What Our Users Say
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Join thousands of satisfied users who have found their dream jobs through KaziKE.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "KaziKE helped me find my dream job in just two weeks! The app is so easy to use and the job recommendations were spot on."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Sarah Mwangi</h4>
+                            <p class="author-title">Software Developer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "As an employer, KaziKE has made hiring so much easier. We found three excellent candidates within a week of posting our job."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">John Kamau</h4>
+                            <p class="author-title">HR Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                            <i class="fas fa-star text-accent"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The mobile app is fantastic! I can search and apply for jobs while commuting. It's changed how I approach job hunting."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Grace Ochieng</h4>
+                            <p class="author-title">Marketing Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Ready to Start Your Journey?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                Join thousands of job seekers and employers who are already using KaziKE to connect and grow.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="btn-white">
+                    <i class="fab fa-google-play mr-2"></i>
+                    Get it on Google Play
+                </button>
+                <button class="btn-white">
+                    <i class="fab fa-apple mr-2"></i>
+                    Download on App Store
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Get in Touch
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="contact-info">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-primary text-xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <p class="text-gray-600">support@kazike.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-primary text-xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">Phone</p>
+                                    <p class="text-gray-600">+254 700 000 000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-primary text-xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">Address</p>
+                                    <p class="text-gray-600">Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                            <div>
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Subject</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Message</label>
+                            <textarea rows="5" class="form-input" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">KaziKE</h3>
+                    <p class="text-gray-300 mb-4">
+                        Connecting talent with opportunity across Kenya and beyond.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">For Job Seekers</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Browse Jobs</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Create Profile</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Career Advice</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Salary Guide</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">For Employers</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Post a Job</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Browse Candidates</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Recruitment Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2024 KaziKE. All rights reserved. Made with ❤️ in Kenya.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
