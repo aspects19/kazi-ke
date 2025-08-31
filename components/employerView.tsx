@@ -202,6 +202,7 @@ export const EmployerView: React.FC = () => {
       <PostJobModal
         visible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
+        onJobPosted={fetchPostedJobs}
       />
     </>
   );

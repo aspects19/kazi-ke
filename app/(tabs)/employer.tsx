@@ -1,12 +1,21 @@
 
 // app/(tabs)/employer.tsx
 import React from "react";
-import { EmployerView } from "@/components/employerView"; // adjust path to your file
-import { View } from "react-native";
+import { ScrollView, SafeAreaView, View } from "react-native";
+import { EmployerView } from "@/components/employerView";
+
 export default function EmployerScreen() {
-  return <View className="flex-1 bg-black">
-          <EmployerView />;
-          </View>
+  return (
+    <SafeAreaView className="flex-1 bg-black">
+      <ScrollView
+        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <EmployerView />
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
+
 
 

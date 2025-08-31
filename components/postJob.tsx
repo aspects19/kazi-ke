@@ -13,6 +13,7 @@ import { useUser } from "@/context/user";
 type PostJobModalProps = {
   visible: boolean;
   onClose: () => void;
+  onJobPosted?: () => void; // Optional callback to refresh job list
 };
 
 const PostJobModal = ({ visible, onClose }: PostJobModalProps) => {
@@ -33,6 +34,7 @@ const PostJobModal = ({ visible, onClose }: PostJobModalProps) => {
         user ? user?.$id : "" // Could introduce bugs if not handled better
       );
       Alert.alert("Success", "Job posted successfully!");
+      if (onJobPosted) onJobPosted();
     } catch (err) {
       if (err instanceof AppwriteException) {
         Alert.alert(err.message);

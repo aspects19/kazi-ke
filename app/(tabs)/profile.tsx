@@ -20,8 +20,8 @@ const ProfileScreen: React.FC = () => {
 
   // Dummy employer comments
   const [comments, setComments] = useState([
-    { id: 1, employer: "ABC Corp", text: "Great cover letter!" },
-    { id: 2, employer: "XYZ Ltd", text: "Please update your portfolio link." },
+    { id: 1, employer: "Caroline", text: "Great gardener always early for work" },
+    { id: 2, employer: "XYZ Ltd", text: " Good servant" },
   ]);
 
   const handleInputChange = (field: string, value: string) => {
