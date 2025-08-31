@@ -4,11 +4,11 @@ import { View, Text, TextInput, ScrollView, Alert, ActivityIndicator, TouchableO
 import { useUser } from '@/context/user';
 import { useLocalSearchParams, router } from 'expo-router';
 import Button from '@/components/Button';
-import { Upload, ArrowLeft } from 'lucide-react-native';
+import { ArrowLeft } from 'lucide-react-native';
 
 const ApplyNowScreen: React.FC = () => {
   const params = useLocalSearchParams();
-  const { title, company, location, type } = params;
+  const { title, company, location, type, description} = params;
   const { user } = useUser();
 
   const [formData, setFormData] = useState({
@@ -58,7 +58,7 @@ const ApplyNowScreen: React.FC = () => {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-gray-900">
       <ScrollView
-        contentContainerStyle={{ padding: 24, paddingBottom: 120 }} // extra padding for submit button + tab bar
+        contentContainerStyle={{ padding: 24, paddingBottom: 120 }} 
         showsVerticalScrollIndicator={false}
       >
         {/* Back Button */}
@@ -75,6 +75,13 @@ const ApplyNowScreen: React.FC = () => {
           <Text className="text-2xl font-bold text-white">{title || 'Job'}</Text>
           <Text className="text-blue-100 text-base">{company || 'Company'} • {location || 'Location'}</Text>
           <Text className="bg-green-700 text-white text-xs px-2 py-1 rounded-full mt-2 w-fit">{type || 'Casual'}</Text>
+        </View>
+
+        <View className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+          <Text className="text-lg font-semibold dark:text-white">Description</Text>
+          <Text className='text-white text-sm px-2 pb-1 rounded-full mt-2 w-fit'>
+            {description}
+          </Text>
         </View>
 
         {/* Applicant Info */}

@@ -20,6 +20,7 @@ export default function TabsLayout() {
           tabBarInactiveTintColor: "#6B7280", // gray-500
           tabBarStyle: {
             position: "absolute",
+            borderTopWidth: 0,
             bottom: 0,
             left: 16,
             right: 16,
@@ -62,7 +63,6 @@ export default function TabsLayout() {
             ),
           }}
         />
-        <Tabs.Screen name="apply" options={{ href: null }} />
       </Tabs>
     </SafeAreaView>
   );
