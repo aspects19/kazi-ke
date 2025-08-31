@@ -1,172 +1,133 @@
+
 // app/(tabs)/profile.tsx
-import React, { useState } from 'react';                                        // 1
-import { View, Text, Image, TouchableOpacity, TextInput, Alert } from 'react-native'; // 2
-// import * as ImagePicker from 'expo-image-picker';                                // 3
-// import { ShieldCheck, Star, Phone, Mail } from 'lucide-react-native';            // 4
-// import { useUserStore } from '@/store/userStore';                                // 5
+import React, { useState } from "react";
+import { View, Text, TextInput, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
+import { useUser } from "@/context/user";
+import Button from "@/components/Button";
+import { router } from "expo-router";
+import { Camera, Edit2 } from "lucide-react-native";
 
-export default function ProfileScreen() {                                        // 6
-//   const { user, updateUser, logout } = useUserStore();                           // 7
-//   const [isEditing, setIsEditing] = useState(false);                             // 8
-//   const [name, setName] = useState(user.name);                                   // 9
-//   const [phone, setPhone] = useState(user.phone ?? '');                          // 10
-//   const [avatar, setAvatar] = useState(user.avatar ?? '');                        // 11
+const ProfileScreen: React.FC = () => {
+  const { user, setUser } = useUser();
 
-//   const pickAvatar = async () => {                                               // 12
-//     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();   // 13
-//     if (status !== 'granted') {                                                  // 14
-//       Alert.alert('Permission required', 'Please allow gallery access.');        // 15
-//       return;                                                                    // 16
-//     }                                                                            // 17
+  const [editableUser, setEditableUser] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+  });
 
-//     const result = await ImagePicker.launchImageLibraryAsync({                   // 18
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,                           // 19
-//       allowsEditing: true,                                                       // 20
-//       aspect: [1, 1],                                                            // 21
-//       quality: 0.8,                                                              // 22
-//     });                                                                          // 23
+  // Track whether we are in edit mode
+  const [isEditing, setIsEditing] = useState(false);
 
-//     if (!result.canceled && result.assets?.[0]?.uri) {                           // 24
-//       setAvatar(result.assets[0].uri);                                           // 25
-//     }                                                                            // 26
-//   };                                                                             // 27
+  const [comments, setComments] = useState([
+    { id: 1, employer: "ABC Corp", text: "Great cover letter!" },
+    { id: 2, employer: "XYZ Ltd", text: "Please update your portfolio link." },
+  ]);
 
-//   const onSave = () => {                                                         // 28
-//     if (!name.trim()) {                                                          // 29
-//       Alert.alert('Validation', 'Name is required');                            // 30
-//       return;                                                                    // 31
-//     }                                                                            // 32
-//     updateUser({ name: name.trim(), phone: phone.trim(), avatar });              // 33
-//     setIsEditing(false);                                                         // 34
-//   };                                                                             // 35
+  const handleInputChange = (field: string, value: string) => {
+    setEditableUser(prev => ({ ...prev, [field]: value }));
+  };
 
-//   const onCancel = () => {                                                       // 36
-//     setName(user.name);                                                          // 37
-//     setPhone(user.phone ?? '');                                                  // 38
-//     setAvatar(user.avatar ?? '');                                                // 39
-//     setIsEditing(false);                                                         // 40
-//   };                                                                             // 41
+  const handleSave = () => {
+    setUser({ ...user, ...editableUser });
+    Alert.alert("Success", "Profile updated successfully!");
+    setIsEditing(false); // Exit edit mode
+  };
 
-//   return (                                                                       // 42
-//     <View className="flex-1 bg-white dark:bg-gray-900">                          // 43
-//       {/* Header / cover */}                                                     // 44
-//       <View className="h-36 bg-blue-600 dark:bg-blue-500" />                     // 45
+  const handleLogout = () => {
+    setUser(null);
+    router.replace("/login");
+  };
 
-//       <View className="-mt-16 px-6">                                             // 46
-//         <View className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow">      // 47
-//           <View className="items-center">                                       // 48
+  const handleChangePhoto = () => {
+    Alert.alert("Change Photo", "Photo upload functionality to be implemented.");
+  };
 
-//             <TouchableOpacity onPress={isEditing ? pickAvatar : undefined}>     // 49
-//               <Image
-//                 source={avatar ? { uri: avatar } : require('@/assets/avatar.png')} // 50
-//                 className="w-24 h-24 rounded-full mb-3"
-//               />
-//             </TouchableOpacity>                                                // 51
+  return (
+    <ScrollView className="flex-1 bg-white dark:bg-gray-900 p-6">
+      {/* Profile Header */}
+      <View className="items-center mb-6">
+        <TouchableOpacity onPress={handleChangePhoto}>
+          <View className="relative">
+            <Image
+              source={{ uri: user?.avatar || "https://i.pravatar.cc/150" }}
+              className="w-24 h-24 rounded-full bg-gray-300"
+            />
+            <Camera className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1" size={20} color="#fff"/>
+          </View>
+        </TouchableOpacity>
+        <Text className="text-xl font-bold text-gray-900 dark:text-white mt-2">{editableUser.name}</Text>
+        <Text className="text-gray-600 dark:text-gray-300">{editableUser.email}</Text>
+      </View>
 
-//             <View className="flex-row items-center gap-2">                      // 52
-//               {isEditing ? (                                                    // 53
-//                 <TextInput
-//                   value={name}
-//                   onChangeText={setName}
-//                   className="text-xl font-semibold text-gray-900 dark:text-white"
-//                   placeholder="Your name"
-//                 />
-//               ) : (                                                              // 54
-//                 <Text className="text-xl font-semibold text-gray-900 dark:text-white">
-//                   {user.name || 'Your Name'}
-//                 </Text>
-//               )}                                                                 // 55
+      {/* Editable Fields or View Mode */}
+      <View className="space-y-4 mb-6">
+        {isEditing ? (
+          <>
+            <Text className="text-gray-700 dark:text-gray-300">Name</Text>
+            <TextInput
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              value={editableUser.name}
+              onChangeText={(text) => handleInputChange("name", text)}
+            />
 
-//               {user.verified && !isEditing && (                                  // 56
-//                 <ShieldCheck size={18} className="text-blue-600" />
-//               )}                                                                 // 57
-//             </View>                                                             // 58
+            <Text className="text-gray-700 dark:text-gray-300">Email</Text>
+            <TextInput
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              value={editableUser.email}
+              editable={false}
+            />
 
-//             <Text className="text-gray-500 dark:text-gray-400">                 // 59
-//               {user.role || 'Worker'}
-//             </Text>
+            <Text className="text-gray-700 dark:text-gray-300">Phone</Text>
+            <TextInput
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              value={editableUser.phone}
+              onChangeText={(text) => handleInputChange("phone", text)}
+            />
 
-//             {!!user.rating && (                                                  // 60
-//               <View className="flex-row items-center gap-1 mt-2">
-//                 <Star size={16} />
-//                 <Text className="text-gray-700 dark:text-gray-200">
-//                   {user.rating} • {user.reviews ?? 0} reviews
-//                 </Text>
-//               </View>
-//             )}                                                                   // 61
-//           </View>                                                               // 62
+            <Button title="Save Changes" handlePress={handleSave} containerStyles="mb-6 w-full" />
+          </>
+        ) : (
+          <>
+            <View className="flex-row justify-between">
+              <Text className="text-gray-700 dark:text-gray-300 font-semibold">Name:</Text>
+              <Text className="text-gray-900 dark:text-white">{editableUser.name}</Text>
+            </View>
+            <View className="flex-row justify-between">
+              <Text className="text-gray-700 dark:text-gray-300 font-semibold">Email:</Text>
+              <Text className="text-gray-900 dark:text-white">{editableUser.email}</Text>
+            </View>
+            <View className="flex-row justify-between">
+              <Text className="text-gray-700 dark:text-gray-300 font-semibold">Phone:</Text>
+              <Text className="text-gray-900 dark:text-white">{editableUser.phone || "Not provided"}</Text>
+            </View>
 
-//           <View className="mt-6 gap-3">                                         // 63
-//             <View className="flex-row items-center gap-3">                      // 64
-//               <Mail size={18} />
-//               <Text className="text-gray-800 dark:text-gray-100">{user.email}</Text>
-//             </View>
+            <Button
+              title="Edit"
+              handlePress={() => setIsEditing(true)}
+              containerStyles="mb-6 w-full bg-blue-500"
+            />
+          </>
+        )}
+      </View>
 
-//             <View className="mt-2">                                             // 65
-//               {isEditing ? (                                                    // 66
-//                 <View className="flex-row items-center gap-3">
-//                   <Phone size={18} />
-//                   <TextInput
-//                     value={phone}
-//                     onChangeText={setPhone}
-//                     placeholder="+254 ..."
-//                     className="text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 flex-1"
-//                   />
-//                 </View>
-//               ) : (                                                              // 67
-//                 user.phone ? (
-//                   <View className="flex-row items-center gap-3">
-//                     <Phone size={18} />
-//                     <Text className="text-gray-800 dark:text-gray-100">{user.phone}</Text>
-//                   </View>
-//                 ) : null
-//               )}                                                                 // 68
-//             </View>
-//           </View>                                                               // 69
+      {/* Logout Button */}
+      <Button title="Logout" handlePress={handleLogout} containerStyles="w-full bg-red-500 mb-6" />
 
-//           <View className="mt-6 flex-row gap-3">                                 // 70
-//             {isEditing ? (                                                      // 71
-//               <>
-//                 <TouchableOpacity className="flex-1 bg-green-600 rounded-xl p-3" onPress={onSave}>
-//                   <Text className="text-white text-center font-medium">Save</Text>
-//                 </TouchableOpacity>
-//                 <TouchableOpacity className="flex-1 bg-gray-200 rounded-xl p-3" onPress={onCancel}>
-//                   <Text className="text-gray-700 text-center font-medium">Cancel</Text>
-//                 </TouchableOpacity>
-//               </>
-//             ) : (                                                                // 72
-//               <>
-//                 <TouchableOpacity className="flex-1 bg-blue-600 rounded-xl p-3" onPress={() => setIsEditing(true)}>
-//                   <Text className="text-white text-center font-medium">Edit Profile</Text>
-//                 </TouchableOpacity>
-//                 <TouchableOpacity className="flex-1 bg-red-600 rounded-xl p-3" onPress={logout}>
-//                   <Text className="text-white text-center font-medium">Log Out</Text>
-//                 </TouchableOpacity>
-//               </>
-//             )}                                                                   // 73
-//           </View>                                                               // 74
-//         </View>                                                                 // 75
-//       </View>                                                                   // 76
+      {/* Employer Comments */}
+      <Text className="text-lg font-bold text-gray-900 dark:text-white mt-8 mb-4">Comments from Employers</Text>
+      {comments.length === 0 ? (
+        <Text className="text-gray-500 dark:text-gray-400">No comments yet.</Text>
+      ) : (
+        comments.map(comment => (
+          <View key={comment.id} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-3">
+            <Text className="font-semibold text-gray-800 dark:text-white">{comment.employer}</Text>
+            <Text className="text-gray-700 dark:text-gray-300 mt-1">{comment.text}</Text>
+          </View>
+        ))
+      )}
+    </ScrollView>
+  );
+};
 
-//       <View className="mt-6 px-6">                                               // 77
-//         <TouchableOpacity className="py-4 border-b border-gray-200 dark:border-gray-700">
-//           <Text className="text-gray-800 dark:text-gray-100">Account Settings</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity className="py-4 border-b border-gray-200 dark:border-gray-700">
-//           <Text className="text-gray-800 dark:text-gray-100">Notifications</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity className="py-4">
-//           <Text className="text-gray-800 dark:text-gray-100">Privacy Policy</Text>
-//         </TouchableOpacity>
-//       </View>
-//     </View>
-//   );                                                                            // 78
-// }                                                                              // 79
-return(                // 80
-  <View className="flex-1 bg-white dark:bg-gray-900 justify-center items-center"> 
-    <Text className="text-gray-800 dark:text-gray-100 text-lg">                  
-      Profile Screen Under Construction                                        
-    </Text>                                                                     
-  </View>                                                                      // 85
-);                                                                             // 86
-}                                                                              // 87
+export default ProfileScreen;

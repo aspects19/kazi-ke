@@ -71,7 +71,7 @@ const ApplyNowScreen: React.FC = () => {
   return (
     <ScrollView className="flex-1 bg-white dark:bg-gray-900">
       {/* Header */}
-      <View className="bg-slate-500 dark:bg-gray-700 p-6 pt-12">
+      <View className="bg-slate-500 dark:bg-gray-700 p-6 pt-12 pb-[140px]">
         <TouchableOpacity 
           onPress={() => router.back()}
           className="flex-row items-center mb-4"
@@ -199,7 +199,7 @@ const ApplyNowScreen: React.FC = () => {
         <Button
           title={isSubmitting ? "Submitting..." : "Submit Application"}
           handlePress={handleSubmit}
-          containerStyles="mt-6"
+          containerStyles="mt-6 w-full"
         />
         
         {isSubmitting && (
