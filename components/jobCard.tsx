@@ -58,7 +58,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
           href={{
             pathname: '/apply',
             params: {
-              title: job?.title || 'Ux Designer',
+              title: job?.title || 'Gardener',
               company: job.company || 'New job',
               location: job.location || 'Nairobi'
           }

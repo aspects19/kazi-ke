@@ -1,3 +1,4 @@
+
 // components/postJob.tsx
 import { useState } from "react";
 import { Alert, Modal, View, Text } from "react-native";
@@ -42,14 +43,15 @@ const PostJobModal = ({ visible, onClose }: PostJobModalProps) => {
   };
 
   return (
-    <SafeAreaView className="content-center items-center my-auto">
+    <SafeAreaView className="content-center items-center my-auto ">
       <Modal
         animationType="fade"
         transparent={false}
         visible={visible}
         onRequestClose={onClose}
       >
-        <View className="items-center content-center m-auto w-[80%] dark:bg-gray-800 rounded-3xl bg-white border border-solid border-gray-600">
+        <View className="flex-1 justify-center items-center dark:bg-gray-900 bg-gray-900">
+        <View className="items-center content-center m-auto w-[80%] dark:bg-gray-800 rounded-3xl bg-gray-900 border border-solid border-gray-600">
           <Text className="dark:text-gray-300 mt-6 text-xl">Post a job</Text>
 
           <FormField
@@ -111,6 +113,7 @@ const PostJobModal = ({ visible, onClose }: PostJobModalProps) => {
             />
           </View>
         </View>
+      </View>
       </Modal>
     </SafeAreaView>
   );
