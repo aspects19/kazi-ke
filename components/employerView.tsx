@@ -1,4 +1,4 @@
-// components/employerView.tsx
+
 // components/employerView.tsx
 import React, { useEffect, useState } from "react";
 import {
@@ -71,6 +71,7 @@ export const EmployerView: React.FC = () => {
   return (
     <>
       <ScrollView className="space-y-4">
+        
         {/* Header */}
         <View className="flex-row justify-between items-center">
           <Text className="text-lg font-semibold dark:text-white">

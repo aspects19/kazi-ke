@@ -1,6 +1,5 @@
 
 // app/(tabs)/profile.tsx
-// app/(tabs)/profile.tsx
 import React, { useState } from "react";
 import { View, Text, TextInput, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useUser } from "@/context/user";
@@ -45,7 +44,7 @@ const ProfileScreen: React.FC = () => {
     if (!name) return "?";
     const names = name.trim().split(" ");
     const initials = names.map(n => n[0].toUpperCase()).join("");
-    return initials.slice(0, 2); // max 2 letters
+    return initials.slice(0, 2);
   };
 
   return (
