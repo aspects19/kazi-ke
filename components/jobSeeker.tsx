@@ -41,20 +41,43 @@ export const JobSeekerView: React.FC = () => {
 
   return (
     <ScrollView className="space-y-4">
-      <View className="relative">
-        <Search
-          size={18}
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
-        />
-        <TextInput
-          placeholder="Search jobs, skills, companies"
-          placeholderTextColor="#9CA3AF"
-          className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent "
-        />
-        <TouchableOpacity className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-1 rounded ">
-          <Filter size={18} className="text-gray-600 dark:text-gray-300" />
-        </TouchableOpacity>
-      </View>
+      <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#15161eff',
+            borderWidth: 1,
+            borderColor: '#D1D5DB',
+            borderRadius: 10,
+            paddingHorizontal: 12,
+            paddingVertical: 8,
+            marginTop: 16,
+          }}
+        >
+          <Search size={18} color="#0e4fc0ff" style={{ marginRight: 8 }} />
+          
+          <TextInput
+            placeholder="Search jobs"
+            placeholderTextColor="#9CA3AF"
+            style={{
+              flex: 1,
+              color: '#fff',
+            }}
+          />
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#F3F4F6',
+              padding: 6,
+              borderRadius: 6,
+              marginLeft: 8,
+            }}
+          >
+            <Filter size={18} color="#4B5563" />
+          </TouchableOpacity>
+        </View>
+
+
 
       <View className="flex-row justify-between items-center">
         <Text className="text-lg font-semibold dark:text-white ">
