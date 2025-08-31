@@ -19,7 +19,7 @@ interface JobCardProps {
 
 export const JobCard: React.FC<JobCardProps> = ({ job }) => {
   return (
-    <View className='bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm dark:shadow-gray-900'>
+    <View className='bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm dark:shadow-gray-900 mb-4'>
       <View  className=' flex justify-between flex-row'>
         <View className='flex-row items-center'>
           <Image

@@ -97,7 +97,7 @@ export const EmployerView: React.FC = () => {
         </View>
 
       {/* Job Posts */}
-      <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+      <View className="bg-white dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
         <View className="flex-row justify-between items-center">
           <Text className="font-semibold dark:text-white">Your Job Posts</Text>
           <TouchableOpacity
@@ -111,7 +111,7 @@ export const EmployerView: React.FC = () => {
           </TouchableOpacity>
         </View>
 
-        <View className="mt-3 space-y-3">
+        <View className="mt-3 space-y-3  ">
           {postedJobs.length === 0 ? (
             <Text className="text-gray-500 dark:text-gray-400 text-center py-4">
               You haven't posted any jobs yet.
@@ -120,7 +120,7 @@ export const EmployerView: React.FC = () => {
             postedJobs.map((job) => (
               <View
                 key={job.$id}
-                className="border border-gray-200 dark:border-gray-700 rounded-lg p-3"
+                className="border border-gray-200 dark:border-gray-700 dark:bg-gray-800 rounded-lg p-3 mb-2"
               >
                 <View className="flex-row justify-between items-start">
                   <View>
@@ -157,7 +157,7 @@ export const EmployerView: React.FC = () => {
       </View>
 
       {/* Recent Applications */}
-      <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+      <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 mt-4">
         <Text className="font-semibold mb-3 dark:text-white">Recent Applications</Text>
         <View className="space-y-3">
           {applications.length === 0 ? (

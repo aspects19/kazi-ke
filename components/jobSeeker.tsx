@@ -150,8 +150,8 @@ export const JobSeekerView: React.FC = () => {
       )}
 
       {/* Recommended Jobs */}
-      <View className="flex-row justify-between items-center">
-        <Text className="text-lg font-semibold dark:text-white ">
+      <View className="flex-row justify-between items-center mt-4" >
+        <Text className="text-lg font-semibold dark:text-white  ">
           Recommended Jobs
         </Text>
         <TouchableOpacity>
@@ -162,7 +162,7 @@ export const JobSeekerView: React.FC = () => {
       </View>
 
       {/* Job List */}
-      <View className="space-y-3">
+      <View className="space-y-3 pt-2">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job, idx) => (
             <JobCard
