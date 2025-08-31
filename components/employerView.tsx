@@ -19,15 +19,24 @@ import type { ApplyDocument } from "@/types/applicationType";
 import { formatPostedAt } from "@/utils/formatPostAt";
 
 export const EmployerView: React.FC = () => {
+  const { user } = useUser(); 
   const [postedJobs, setPostedJobs] = useState<JobDocument[]>([]);
   const [applications, setApplications] = useState<ApplyDocument[]>([]);
-  const [isModalVisible, setIsModalVisible] = useState(false); // ✅ For modal control
+  const [isModalVisible, setIsModalVisible] = useState(false); 
 
   async function fetchPostedJobs() {
     try {
       const response = await getCollection(config.jobsCollectionId);
+    
+      const myJobs = (response as any[]).filter(
+      (doc) => doc.posted_by === user?.$id
+    );
+
+      
+      
+      
       setPostedJobs(
-        (response as any[]).map((doc) => ({
+        myJobs.map((doc) => ({
           ...doc,
           title: doc.title ?? "",
           posted_at: doc.posted_at ?? "",
@@ -87,35 +96,44 @@ export const EmployerView: React.FC = () => {
           </View>
         </View>
 
-        {/* Job Posts */}
-        <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <View className="flex-row justify-between items-center">
-            <Text className="font-semibold dark:text-white">Your Job Posts</Text>
-            <TouchableOpacity
-              onPress={() => setIsModalVisible(true)} // ✅ Open modal
-              className="flex-row items-center text-sm text-blue-600 dark:text-blue-400 font-medium"
-            >
-              <Plus size={16} className="mr-1 text-blue-600 dark:text-blue-400" />
-              <Text className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                Post a Job
-              </Text>
-            </TouchableOpacity>
-          </View>
+      {/* Job Posts */}
+      <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <View className="flex-row justify-between items-center">
+          <Text className="font-semibold dark:text-white">Your Job Posts</Text>
+          <TouchableOpacity
+            onPress={() => setIsModalVisible(true)}
+            className="flex-row items-center text-sm text-blue-600 dark:text-blue-400 font-medium"
+          >
+            <Plus size={16} className="mr-1 text-blue-600 dark:text-blue-400" />
+            <Text className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+              Post a Job
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-          <View className="mt-3 space-y-3">
-            {postedJobs.map((job) => (
+        <View className="mt-3 space-y-3">
+          {postedJobs.length === 0 ? (
+            <Text className="text-gray-500 dark:text-gray-400 text-center py-4">
+              You haven't posted any jobs yet.
+            </Text>
+          ) : (
+            postedJobs.map((job) => (
               <View
                 key={job.$id}
                 className="border border-gray-200 dark:border-gray-700 rounded-lg p-3"
               >
                 <View className="flex-row justify-between items-start">
                   <View>
-                    <Text className="font-medium dark:text-white">
-                      {job.title}
-                    </Text>
-                    <Text className="text-sm text-gray-500 dark:text-gray-400">
-                      {job.applicants} applicants • {formatPostedAt(job.posted_at)}
-                    </Text>
+                    <Text className="font-medium dark:text-white">{job.title}</Text>
+                    {job.applicants === 0 ? (
+                      <Text className="text-sm text-gray-500 dark:text-gray-400">
+                        No applicants yet
+                      </Text>
+                    ) : (
+                      <Text className="text-sm text-gray-500 dark:text-gray-400">
+                        {job.applicants} applicants • {formatPostedAt(job.posted_at)}
+                      </Text>
+                    )}
                   </View>
                   <Text className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full">
                     {job.status}
@@ -129,23 +147,25 @@ export const EmployerView: React.FC = () => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity>
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">
-                      Edit
-                    </Text>
+                    <Text className="text-sm text-gray-600 dark:text-gray-400">Edit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            ))}
-          </View>
+            ))
+          )}
         </View>
+      </View>
 
-        {/* Recent Applications */}
-        <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <Text className="font-semibold mb-3 dark:text-white">
-            Recent Applications
-          </Text>
-          <View className="space-y-3">
-            {applications.map((applicant) => (
+      {/* Recent Applications */}
+      <View className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <Text className="font-semibold mb-3 dark:text-white">Recent Applications</Text>
+        <View className="space-y-3">
+          {applications.length === 0 ? (
+            <Text className="text-gray-500 dark:text-gray-400 text-center py-4">
+              No applications yet.
+            </Text>
+          ) : (
+            applications.map((applicant) => (
               <View
                 key={applicant.$id}
                 className="flex-row items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0"
@@ -153,9 +173,7 @@ export const EmployerView: React.FC = () => {
                 <View className="flex-row items-center">
                   <Avatar src={applicant.avatar} alt={applicant.name} />
                   <View className="ml-3">
-                    <Text className="font-medium dark:text-white">
-                      {applicant.name}
-                    </Text>
+                    <Text className="font-medium dark:text-white">{applicant.name}</Text>
                     <Text className="text-sm text-gray-500 dark:text-gray-400">
                       {applicant.role} • {applicant.experience}
                     </Text>
@@ -173,9 +191,11 @@ export const EmployerView: React.FC = () => {
                   {applicant.status}
                 </Text>
               </View>
-            ))}
-          </View>
+            ))
+          )}
         </View>
+      </View>
+
       </ScrollView>
 
       {/* ✅ Modal Component */}
