@@ -1,3 +1,4 @@
+// components/jobCard.tsx
 import React from 'react';
 import { BookmarkIcon } from 'lucide-react-native';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
@@ -57,7 +58,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
           href={{
             pathname: '/apply',
             params: {
-              title: job?.title || 'Ux Designer',
+              title: job?.title || 'Gardener',
               company: job.company || 'New job',
               location: job.location || 'Nairobi'
           }

@@ -1,3 +1,4 @@
+// components/jobSeeker.tsx
 import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { JobCard } from './jobCard';

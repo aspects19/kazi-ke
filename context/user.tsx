@@ -8,6 +8,7 @@ import { config } from '../lib/appwrite';
 
 type UserContextType = {
   user: Models.User<object> | null;
+  setUser: React.Dispatch<React.SetStateAction<Models.User<object> | null>>; 
   isLoading: boolean;
   initUser: () => Promise<void>;
   signup: (email: string, password: string, name: string) => Promise<void>;
@@ -75,7 +76,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, initUser, signup, login, logout, isLoading }}>
+    <UserContext.Provider value={{ user,setUser, initUser, signup, login, logout, isLoading }}>
       {children}
     </UserContext.Provider>
   );
