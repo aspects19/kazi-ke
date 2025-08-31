@@ -1,3 +1,4 @@
+// components/jobCard.tsx
 import React from 'react';
 import { BookmarkIcon } from 'lucide-react-native';
 import { View, Text, Image, TouchableOpacity } from 'react-native';

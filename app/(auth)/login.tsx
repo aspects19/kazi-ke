@@ -1,3 +1,4 @@
+// app/(auth)/login.tsx
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import FormField from '@/components/formField';
@@ -32,7 +33,7 @@ const [form, setForm] = useState({
   }
 
   if (user) {
-    return <Redirect href={'/home'}/>
+    return <Redirect href={'/jobseeker'}/>
   }
 
   return (
@@ -78,3 +79,5 @@ const [form, setForm] = useState({
 
   )
 }
+
+

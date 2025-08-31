@@ -1,3 +1,4 @@
+
 // app/(tabs)/employer.tsx
 import React from "react";
 import { EmployerView } from "@/components/employerView"; // adjust path to your file
@@ -7,3 +8,5 @@ export default function EmployerScreen() {
           <EmployerView />;
           </View>
 }
+
+

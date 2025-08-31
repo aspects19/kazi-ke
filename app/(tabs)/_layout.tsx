@@ -25,19 +25,23 @@
 // }
 
 // app/(tabs)/_layout.tsx
+import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Platform } from "react-native";
+import { StatusBar } from "react-native";
 
 export default function TabsLayout() {
+  StatusBar.setHidden(true);
   return (
-  
+  <>
+    
     <Tabs
       screenOptions={{
 
         headerShown: false,
-        statusBarHidden: true
+        
         tabBarActiveTintColor: "#2563EB", // tailwind blue-600
         tabBarInactiveTintColor: "#6B7280", // gray-500
         // tabBarStyle: {
@@ -51,7 +55,7 @@ export default function TabsLayout() {
           left: 20,
           right: 20,
           height: 80,
-          paddingBottom: 20,
+          paddingBottom: 10,
           backgroundColor: "black",
           borderRadius: 30, // rounded corners
           elevation: 5, // Android shadow
@@ -91,11 +95,12 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen name="home" options={{ href: null }} />
+      {/* <Tabs.Screen name="home" options={{ href: null }} /> */}
       <Tabs.Screen name="apply" options={{ href: null }} />
 
 
     </Tabs>
+  </>
   );
 }
 

@@ -1,3 +1,5 @@
+
+// app/(tabs)/apply.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import { useUser } from '@/context/user';
